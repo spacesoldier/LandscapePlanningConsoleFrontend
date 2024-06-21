@@ -3,12 +3,12 @@ import {StickyNavbar} from "./StickyNavbar";
 import JumboLandingTron from "./JumboLandingTron";
 
 
-function LoginPage({authProviderInstance}) {
+function LoginPage() {
 
     return (
         <div>
-            <StickyNavbar authProvider={authProviderInstance}/>
-            <JumboLandingTron keycloakInstance={authProviderInstance}/>
+            <StickyNavbar />
+            <JumboLandingTron />
         </div>
 
     );

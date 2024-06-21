@@ -4,14 +4,14 @@ import {FeaturedImageGallery} from "./ImageGallery";
 import {SidebarWithCta} from "./SidebarWithCta";
 import {SystemNavbar} from "./SystemNavbar";
 
-// import { useKeycloak } from "@react-keycloak/web";
 
-function ConstructorPage({authProviderInstance, authInitialized}){
+function ConstructorPage(){
 
+    const { keycloak, initialized } = useKeycloak();
 
     return (
         <div className="App">
-            <SystemNavbar authInstance={authProviderInstance} authInitialized={authInitialized}/>
+            <SystemNavbar />
 
             <div class="container">
                 <h1 className="bg-slate-500 text-black text-center">Тут будет список проектов пользователя</h1>

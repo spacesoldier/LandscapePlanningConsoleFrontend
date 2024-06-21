@@ -8,8 +8,9 @@ import {
     Card,
 } from "@material-tailwind/react";
 import SubscriptionPopover from "./LoginPopover";
+import LoginButton from "./LoginButton";
 
-export function StickyNavbar({authProvider}) {
+export function StickyNavbar() {
     const [openNav, setOpenNav] = React.useState(false);
 
     React.useEffect(() => {
@@ -48,7 +49,8 @@ export function StickyNavbar({authProvider}) {
                     <div className="flex items-center gap-4">
                         <div className="mr-4 hidden lg:block">{navList}</div>
                         <div className="flex items-center gap-x-1">
-                            <SubscriptionPopover btnSize="sm" authService={authProvider}/>
+                            <LoginButton btnSize="sm"/>
+                            {/*<SubscriptionPopover btnSize="sm" authService={authProvider}/>*/}
                         </div>
                         <IconButton
                             variant="text"
@@ -92,7 +94,8 @@ export function StickyNavbar({authProvider}) {
                 <MobileNav open={openNav}>
                     {navList}
                     <div className="flex items-center gap-x-1">
-                        <SubscriptionPopover btnSize="sm" authService={authProvider}/>
+                        <LoginButton btnSize="sm"/>
+                        {/*<SubscriptionPopover btnSize="sm" authService={authProvider}/>*/}
                     </div>
                 </MobileNav>
             </Navbar>

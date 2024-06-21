@@ -1,7 +1,9 @@
 
 import SubscriptionPopover from "./LoginPopover";
+import LoginButton from "./LoginButton";
+import React from "@types/react";
 
-function JumboLandingTron({keycloakInstance}){
+function JumboLandingTron(){
 
     return(
 
@@ -17,7 +19,8 @@ function JumboLandingTron({keycloakInstance}){
                     Подбор оборудования в соответствии с потребностями жителей и территории в целом
                 </p>
                 <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
-                    <SubscriptionPopover btnSize="lg" authService={keycloakInstance}/>
+                    <LoginButton btnSize="lg"/>
+                    {/*<SubscriptionPopover btnSize="lg" authService={keycloakInstance}/>*/}
                 </div>
             </div>
         </section>
