@@ -1,7 +1,6 @@
 
-import SubscriptionPopover from "./LoginPopover";
 import LoginButton from "./LoginButton";
-import React from "@types/react";
+
 
 function JumboLandingTron(){
 
