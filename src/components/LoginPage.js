@@ -1,24 +1,8 @@
-import React, { useState } from "react";
-import { useKeycloak } from "@react-keycloak/web";
+
 import {StickyNavbar} from "./StickyNavbar";
 import JumboLandingTron from "./JumboLandingTron";
 
 function LoginPage() {
-    const { keycloak } = useKeycloak();
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        try {
-            await keycloak.login({
-                username,
-                password,
-            });
-        } catch (error) {
-            console.error("Failed to log in", error);
-        }
-    };
 
     return (
         <div>
