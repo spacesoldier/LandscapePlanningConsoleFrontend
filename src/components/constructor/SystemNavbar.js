@@ -7,9 +7,12 @@ import {
     IconButton,
     Card,
 } from "@material-tailwind/react";
+import { FaUser } from "react-icons/fa6";
+import { useKeycloak } from "@react-keycloak/web";
 
 export function SystemNavbar() {
     const [openNav, setOpenNav] = React.useState(false);
+    const { keycloak, initialized } = useKeycloak();
 
     React.useEffect(() => {
         window.addEventListener(
@@ -26,9 +29,11 @@ export function SystemNavbar() {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <a href="src/components/landing/StickyNavbar#" className="flex items-center">
-                    Документация
-                </a>
+                <FaUser />
+                <div className="flex items-center">{keycloak.tokenParsed.preferred_username}</div>
+                {/*<a href="src/components/landing/StickyNavbar#" className="flex items-center">*/}
+                {/*    Документация*/}
+                {/*</a>*/}
             </Typography>
         </ul>
     );
@@ -50,6 +55,7 @@ export function SystemNavbar() {
                             <Button
                                 variant="gradient"
                                 className="lg:inline-block"
+                                onClick={keycloak.logout()}
                             >
                                 Выйти
                             </Button>
@@ -99,6 +105,7 @@ export function SystemNavbar() {
                         <Button
                             variant="gradient"
                             className="lg:inline-block"
+                            onClick={keycloak.logout()}
                         >
                             Выйти
                         </Button>

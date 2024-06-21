@@ -1,16 +1,21 @@
 import React from "react";
-import {StickyNavbar} from "../landing/StickyNavbar";
 import SimpleCard from "./SimpleCard";
 import {FeaturedImageGallery} from "./ImageGallery";
 import {SidebarWithCta} from "./SidebarWithCta";
+import {SystemNavbar} from "./SystemNavbar";
+
+import { useKeycloak } from "@react-keycloak/web";
 
 function ConstructorPage(){
+
+    const { keycloak, initialized } = useKeycloak();
+
     return (
         <div className="App">
-            <StickyNavbar />
+            <SystemNavbar />
 
             <div class="container">
-                <h1 className="bg-slate-500 text-white text-center">This is a Tailwind styled site!</h1>
+                <h1 className="bg-slate-500 text-black text-center">Тут будет список проектов пользователя</h1>
             </div>
             <div class="gap-8 columns-3">
                 <SimpleCard />

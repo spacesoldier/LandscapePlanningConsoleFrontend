@@ -26,6 +26,7 @@ import {
     CubeTransparentIcon,
 } from "@heroicons/react/24/outline";
 
+
 export function SidebarWithCta() {
     const [open, setOpen] = React.useState(0);
     const [openAlert, setOpenAlert] = React.useState(true);
@@ -37,6 +38,7 @@ export function SidebarWithCta() {
     return (
         <Card className="h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
             <div className="mb-2 p-4">
+
                 <Typography variant="h5" color="blue-gray">
                     Sidebar
                 </Typography>

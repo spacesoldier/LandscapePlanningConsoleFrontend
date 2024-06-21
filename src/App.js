@@ -5,7 +5,6 @@ import LoginPage from "./components/landing/LoginPage";
 import {useKeycloak} from "@react-keycloak/web";
 import ConstructorPage from "./components/constructor/ConstructorPage";
 
-import {useEffect, useState} from "react";
 import {LoadingPage} from "./components/LoadingPage";
 
 function App() {
