@@ -8,6 +8,7 @@ import ConstructorPage from "./components/ConstructorPage";
 // import { ReactKeycloakProvider } from "@react-keycloak/web";
 // import KeycloakConfig from "./components/Keycloak";
 import {useEffect, useState} from "react";
+import {LoadingPage} from "./components/LoadingPage";
 
 function App() {
 
@@ -26,7 +27,7 @@ function App() {
     const { keycloak, initialized } = useKeycloak();
 
     if (!initialized) {
-        return <div>Loading...</div>;
+        return <LoadingPage />      //<div>Loading...</div>;
     }
 
     if (!keycloak.authenticated) {

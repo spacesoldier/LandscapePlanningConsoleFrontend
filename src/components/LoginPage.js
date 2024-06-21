@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useKeycloak } from "@react-keycloak/web";
+import LoginForm from "./LoginForm";
+import {StickyNavbar} from "./StickyNavbar";
 
 function LoginPage() {
     const { keycloak } = useKeycloak();
@@ -19,21 +21,31 @@ function LoginPage() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                placeholder="Username"
-                value={username}
-                onChange={(event) => setUsername(event.target.value)}
-            />
-            <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-            />
-            <button type="submit">Log in</button>
-        </form>
+
+        <StickyNavbar />
+
+        // <div>
+        //     <div className="container">
+        //     <form onSubmit={handleSubmit}>
+        //         <input
+        //             type="text"
+        //             placeholder="Username"
+        //             value={username}
+        //             onChange={(event) => setUsername(event.target.value)}
+        //         />
+        //         <input
+        //             type="password"
+        //             placeholder="Password"
+        //             value={password}
+        //             onChange={(event) => setPassword(event.target.value)}
+        //         />
+        //         <button type="submit">Log in</button>
+        //     </form>
+        //     </div>
+        //     <div className="container">
+        //         <LoginForm />
+        //     </div>
+        // </div>
     );
 }
 
