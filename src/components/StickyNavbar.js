@@ -7,6 +7,7 @@ import {
     IconButton,
     Card,
 } from "@material-tailwind/react";
+import {SubscriptionPopover} from "./LoginPopover";
 
 export function StickyNavbar() {
     const [openNav, setOpenNav] = React.useState(false);
@@ -84,13 +85,17 @@ export function StickyNavbar() {
                             {/*>*/}
                             {/*    <span>Log In</span>*/}
                             {/*</Button>*/}
-                            <Button
-                                variant="gradient"
-                                size="sm"
-                                className="hidden lg:inline-block"
-                            >
-                                <span>Log in</span>
-                            </Button>
+                            {/*<Button*/}
+                            {/*    variant="gradient"*/}
+                            {/*    size="sm"*/}
+                            {/*    className="hidden lg:inline-block"*/}
+                            {/*>*/}
+                            {/*<Button>*/}
+                            {/*    /!*<span>Log in</span>*!/*/}
+                            {/*    */}
+                            {/*</Button>*/}
+
+                            <SubscriptionPopover />
                         </div>
                         <IconButton
                             variant="text"
@@ -134,12 +139,14 @@ export function StickyNavbar() {
                 <MobileNav open={openNav}>
                     {navList}
                     <div className="flex items-center gap-x-1">
-                        <Button fullWidth variant="text" size="sm" className="">
-                            <span>Log In</span>
-                        </Button>
-                        <Button fullWidth variant="gradient" size="sm" className="">
-                            <span>Sign in</span>
-                        </Button>
+                        {/*<Button fullWidth variant="text" size="sm" className="">*/}
+                        {/*    <span>Log In</span>*/}
+                        {/*</Button>*/}
+                        {/*<Button fullWidth variant="gradient" size="sm" className="">*/}
+                        {/*<Button>*/}
+                            {/*<span>Log in</span>*/}
+                        {/*</Button>*/}
+                        <SubscriptionPopover />
                     </div>
                 </MobileNav>
             </Navbar>
