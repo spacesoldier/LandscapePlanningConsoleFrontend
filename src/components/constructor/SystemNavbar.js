@@ -29,8 +29,10 @@ export function SystemNavbar() {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <FaUser />
-                <div className="flex items-center">{keycloak.tokenParsed.preferred_username}</div>
+                <div className="flex justify-between">
+                    <FaUser />
+                    <div className="flex items-center">{keycloak.tokenParsed.preferred_username}</div>
+                </div>
             </Typography>
         </ul>
     );

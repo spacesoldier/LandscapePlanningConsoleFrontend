@@ -49,8 +49,7 @@ export function StickyNavbar() {
                     <div className="flex items-center gap-4">
                         <div className="mr-4 hidden lg:block">{navList}</div>
                         <div className="flex items-center gap-x-1">
-                            <LoginButton btnSize="sm"/>
-                            {/*<SubscriptionPopover btnSize="sm" authService={authProvider}/>*/}
+                            <LoginButton buttonSize="sm"/>
                         </div>
                         <IconButton
                             variant="text"
@@ -94,8 +93,7 @@ export function StickyNavbar() {
                 <MobileNav open={openNav}>
                     {navList}
                     <div className="flex items-center gap-x-1">
-                        <LoginButton btnSize="sm"/>
-                        {/*<SubscriptionPopover btnSize="sm" authService={authProvider}/>*/}
+                        <LoginButton buttonSize="sm"/>
                     </div>
                 </MobileNav>
             </Navbar>
