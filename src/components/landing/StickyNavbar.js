@@ -48,7 +48,7 @@ export function StickyNavbar({authProvider}) {
                     <div className="flex items-center gap-4">
                         <div className="mr-4 hidden lg:block">{navList}</div>
                         <div className="flex items-center gap-x-1">
-                            <SubscriptionPopover btnSize="sm" />
+                            <SubscriptionPopover btnSize="sm" authService={authProvider}/>
                         </div>
                         <IconButton
                             variant="text"
