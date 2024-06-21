@@ -16,8 +16,8 @@ export function LoginForm({keycloakInstance}) {
         event.preventDefault();
         try {
             await keycloakInstance.login({
-                username,
-                password,
+                username: username,
+                password: password,
             });
         } catch (error) {
             console.error("Failed to log in", error);
