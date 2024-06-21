@@ -8,7 +8,7 @@ import {
 } from "@material-tailwind/react";
 import LoginForm from "./LoginForm";
 
-export function SubscriptionPopover() {
+function SubscriptionPopover({btnSize}) {
     return (
         <Popover
             animate={{
@@ -19,10 +19,10 @@ export function SubscriptionPopover() {
             <PopoverHandler>
                 <Button
                         variant="gradient"
-                        size="sm"
+                        size={btnSize}
                         className="hidden lg:inline-block"
                 >
-                    Log In
+                    Войти
                 </Button>
             </PopoverHandler>
             <PopoverContent className="w-1/3">
@@ -54,3 +54,5 @@ export function SubscriptionPopover() {
         </Popover>
     );
 }
+
+export default SubscriptionPopover

@@ -7,7 +7,7 @@ import {
     IconButton,
     Card,
 } from "@material-tailwind/react";
-import {SubscriptionPopover} from "./LoginPopover";
+import SubscriptionPopover from "./LoginPopover";
 
 export function StickyNavbar() {
     const [openNav, setOpenNav] = React.useState(false);
@@ -58,7 +58,7 @@ export function StickyNavbar() {
                 className="p-1 font-normal"
             >
                 <a href="#" className="flex items-center">
-                    Docs
+                    Документация
                 </a>
             </Typography>
         </ul>
@@ -95,7 +95,7 @@ export function StickyNavbar() {
                             {/*    */}
                             {/*</Button>*/}
 
-                            <SubscriptionPopover />
+                            <SubscriptionPopover btnSize="sm"/>
                         </div>
                         <IconButton
                             variant="text"
@@ -146,7 +146,7 @@ export function StickyNavbar() {
                         {/*<Button>*/}
                             {/*<span>Log in</span>*/}
                         {/*</Button>*/}
-                        <SubscriptionPopover />
+                        <SubscriptionPopover btnSize="sm"/>
                     </div>
                 </MobileNav>
             </Navbar>

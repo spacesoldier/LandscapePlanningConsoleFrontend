@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useKeycloak } from "@react-keycloak/web";
-import LoginForm from "./LoginForm";
 import {StickyNavbar} from "./StickyNavbar";
+import JumboLandingTron from "./JumboLandingTron";
 
 function LoginPage() {
     const { keycloak } = useKeycloak();
@@ -21,8 +21,11 @@ function LoginPage() {
     };
 
     return (
+        <div>
+            <StickyNavbar />
+            <JumboLandingTron />
+        </div>
 
-        <StickyNavbar />
 
         // <div>
         //     <div className="container">
