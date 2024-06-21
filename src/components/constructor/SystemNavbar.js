@@ -30,7 +30,7 @@ export function SystemNavbar({authInstance, authInitialized}) {
                 className="p-1 font-normal"
             >
                 <FaUser />
-                <div className="flex items-center">{authInstance.tokenParsed.preferred_username}</div>
+                {/*<div className="flex items-center">{authInstance.tokenParsed.preferred_username}</div>*/}
             </Typography>
         </ul>
     );
