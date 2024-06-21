@@ -1,5 +1,5 @@
 # for production we give name as build
-FROM node:20.15.0 as build
+FROM node:20.14.0 as build
 
 # Set working directory to /app
 WORKDIR /app
