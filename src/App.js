@@ -1,9 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
 
-import LoginPage from "./components/LoginPage";
+import LoginPage from "./components/landing/LoginPage";
 import {useKeycloak} from "@react-keycloak/web";
-import ConstructorPage from "./components/ConstructorPage";
+import ConstructorPage from "./components/constructor/ConstructorPage";
 
 import {useEffect, useState} from "react";
 import {LoadingPage} from "./components/LoadingPage";

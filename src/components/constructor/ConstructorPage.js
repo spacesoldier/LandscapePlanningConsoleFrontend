@@ -1,5 +1,5 @@
 import React from "react";
-import {StickyNavbar} from "./StickyNavbar";
+import {StickyNavbar} from "../landing/StickyNavbar";
 import SimpleCard from "./SimpleCard";
 import {FeaturedImageGallery} from "./ImageGallery";
 import {SidebarWithCta} from "./SidebarWithCta";
