@@ -3,7 +3,7 @@ import SimpleCard from "./SimpleCard";
 import {FeaturedImageGallery} from "./ImageGallery";
 import {SidebarWithCta} from "./SidebarWithCta";
 import {SystemNavbar} from "./SystemNavbar";
-
+import { useKeycloak } from "@react-keycloak/web";
 
 function ConstructorPage(){
 
