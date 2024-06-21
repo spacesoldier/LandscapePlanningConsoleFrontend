@@ -1,7 +1,7 @@
 
 import SubscriptionPopover from "./LoginPopover";
 
-function JumboLandingTron(){
+function JumboLandingTron({keycloakInstance}){
 
     return(
 
@@ -17,7 +17,7 @@ function JumboLandingTron(){
                     Подбор оборудования в соответствии с потребностями жителей и территории в целом
                 </p>
                 <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
-                    <SubscriptionPopover btnSize="lg" />
+                    <SubscriptionPopover btnSize="lg" authService={keycloakInstance}/>
                 </div>
             </div>
         </section>

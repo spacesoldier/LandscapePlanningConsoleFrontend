@@ -6,9 +6,8 @@ import {SystemNavbar} from "./SystemNavbar";
 
 import { useKeycloak } from "@react-keycloak/web";
 
-function ConstructorPage(){
+function ConstructorPage({authProviderInstance, authInitialized}){
 
-    const { keycloak, initialized } = useKeycloak();
 
     return (
         <div className="App">

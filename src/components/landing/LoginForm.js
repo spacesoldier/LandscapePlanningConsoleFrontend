@@ -1,21 +1,21 @@
 import React, { useState } from "react";
-import { useKeycloak } from "@react-keycloak/web";
+// import { useKeycloak } from "@react-keycloak/web";
 
 import { Typography, Input, Button } from "@material-tailwind/react";
 import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/solid";
 
-export function LoginForm() {
+export function LoginForm({keycloakInstance}) {
     const [passwordShown, setPasswordShown] = useState(false);
     const togglePasswordVisiblity = () => setPasswordShown((cur) => !cur);
 
-    const { keycloak } = useKeycloak();
+    // const { keycloak } = useKeycloak();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await keycloak.login({
+            await keycloakInstance.login({
                 username,
                 password,
             });

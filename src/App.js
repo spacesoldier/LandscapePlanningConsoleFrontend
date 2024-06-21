@@ -16,11 +16,11 @@ function App() {
     }
 
     if (!keycloak.authenticated) {
-        return <LoginPage />;
+        return <LoginPage authProviderInstance={keycloak}/>;
     }
 
   return (
-      <ConstructorPage />
+      <ConstructorPage authProviderInstance={keycloak} authInitialized={initialized}/>
   );
 }
 

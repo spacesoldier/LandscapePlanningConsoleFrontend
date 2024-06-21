@@ -8,7 +8,7 @@ import {
 } from "@material-tailwind/react";
 import LoginForm from "./LoginForm";
 
-function SubscriptionPopover({btnSize}) {
+function SubscriptionPopover({btnSize, authService}) {
     return (
         <Popover
             animate={{
@@ -28,7 +28,7 @@ function SubscriptionPopover({btnSize}) {
             <PopoverContent
                 className="w-1/3 z-40"
             >
-                <LoginForm />
+                <LoginForm keycloakInstance={authService}/>
             </PopoverContent>
         </Popover>
     );

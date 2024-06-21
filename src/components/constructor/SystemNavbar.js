@@ -8,11 +8,11 @@ import {
     Card,
 } from "@material-tailwind/react";
 import { FaUser } from "react-icons/fa6";
-import { useKeycloak } from "@react-keycloak/web";
+// import { useKeycloak } from "@react-keycloak/web";
 
-export function SystemNavbar() {
+export function SystemNavbar({authInstance, authInitialized}) {
     const [openNav, setOpenNav] = React.useState(false);
-    const { keycloak, initialized } = useKeycloak();
+    // const { keycloak, initialized } = useKeycloak();
 
     React.useEffect(() => {
         window.addEventListener(
@@ -30,7 +30,7 @@ export function SystemNavbar() {
                 className="p-1 font-normal"
             >
                 <FaUser />
-                <div className="flex items-center">{keycloak.tokenParsed.preferred_username}</div>
+                <div className="flex items-center">{authInstance.tokenParsed.preferred_username}</div>
             </Typography>
         </ul>
     );
@@ -52,7 +52,7 @@ export function SystemNavbar() {
                             <Button
                                 variant="gradient"
                                 className="lg:inline-block"
-                                onClick={keycloak.logout}
+                                onClick={authInstance.logout}
                             >
                                 Выйти
                             </Button>
@@ -102,7 +102,7 @@ export function SystemNavbar() {
                         <Button
                             variant="gradient"
                             className="lg:inline-block"
-                            onClick={keycloak.logout()}
+                            onClick={authInstance.logout()}
                         >
                             Выйти
                         </Button>
