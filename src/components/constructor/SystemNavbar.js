@@ -31,9 +31,6 @@ export function SystemNavbar() {
             >
                 <FaUser />
                 <div className="flex items-center">{keycloak.tokenParsed.preferred_username}</div>
-                {/*<a href="src/components/landing/StickyNavbar#" className="flex items-center">*/}
-                {/*    Документация*/}
-                {/*</a>*/}
             </Typography>
         </ul>
     );
@@ -55,7 +52,7 @@ export function SystemNavbar() {
                             <Button
                                 variant="gradient"
                                 className="lg:inline-block"
-                                onClick={keycloak.logout()}
+                                onClick={keycloak.logout}
                             >
                                 Выйти
                             </Button>
