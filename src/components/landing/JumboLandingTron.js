@@ -6,11 +6,15 @@ function JumboLandingTron(){
 
     return(
 
+        // <section
+        //     className="bg-cover h-full w-full bg-no-repeat bg-[url('img/area_view.jpeg')] bg-gray-700 bg-blend-multiply"
+        // >
         <section
-            className="bg-cover h-screen -mt-40 bg-no-repeat bg-[url('img/area_view.jpeg')] bg-gray-700 bg-blend-multiply"
+            className="bg-cover flex flex-col  flex-grow bg-no-repeat bg-[url('img/area_view.jpeg')] bg-gray-700 bg-blend-multiply"
         >
-            <div className="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56">
-                <h1 className="mt-20 mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
+            {/*<div className="px-4 mx-auto max-w-screen-xl text-center lg:py-56">*/}
+            <div className="px-4 mx-auto max-w-screen-xl text-center pt-40 pb-28">
+                <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
                     Конструктор пространственных решений
                 </h1>
                 <p className="mb-20 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">

@@ -6,9 +6,12 @@ import JumboLandingTron from "./JumboLandingTron";
 function LoginPage() {
 
     return (
-        <div>
+        <div className="flex flex-col grow">
             <StickyNavbar />
-            <JumboLandingTron />
+            {/*<section className="flex flex-grow">*/}
+                <JumboLandingTron />
+            {/*</section>*/}
+
         </div>
 
     );
