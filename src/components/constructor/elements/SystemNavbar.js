@@ -33,8 +33,8 @@ export function SystemNavbar() {
             >
                 <div className="inline-flex items-center">
                     <FaUser className="w-4 h-4"/>
-                    <div className="pl-4">architect</div>
-                    {/*<div className="flex items-center">{keycloak.tokenParsed.preferred_username}</div>*/}
+                    {/*<div className="pl-4">architect</div>*/}
+                    <div className="pl-4">{keycloak.tokenParsed.preferred_username}</div>
                 </div>
             </Typography>
         </ul>
