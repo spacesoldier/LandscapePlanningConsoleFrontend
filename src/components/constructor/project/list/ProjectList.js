@@ -88,7 +88,7 @@ function ProjectList({stageUpdateSink, username}){
                         Проекты пользователя {username}
                     </Typography>
                     <hr className="h-px" />
-                    <div className="grid grid-cols-4 h-full pt-8" >
+                    <div className="grid grid-cols-4 h-full pt-8 overflow-y-scroll" >
                         <div >
                             <Button
                                 variant="outlined"
