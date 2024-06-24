@@ -126,7 +126,7 @@ function DefineProjectContent({stageUpdateSink, username}){
 
     return (
 
-            <div className="flex grow flex-row gap-4 pl-2 pr-2 ">
+            <div className="flex grow flex-row gap-4 pl-2 pr-2 pb-4">
                     <Card className="mt-6 w-full basis-2/3 shadow-lg pl-2">
                         <CardBody className="h-full">
                             <Typography variant="h5" color="blue-gray" className="mb-2">
