@@ -53,6 +53,7 @@ const config = () => {
     const token = authProvider().keycloak.token
 
     return{
+        scheme: 'https',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
