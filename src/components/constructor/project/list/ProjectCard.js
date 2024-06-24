@@ -12,7 +12,7 @@ function ProjectCard({project_data}){
     }
 
     return (
-        <Card key={project_data.project_id} className="h-40 w-80 shadow-2xl">
+        <Card key={project_data.project_id} className="h-40 w-80 shadow-2xl mb-4">
             <CardBody>
                 <Typography>
                     {/*<span>{project_data.project_name}</span>*/}

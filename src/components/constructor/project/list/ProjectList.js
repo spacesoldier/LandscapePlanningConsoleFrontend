@@ -34,17 +34,11 @@ function ProjectList({stageUpdateSink, username}){
         retrieveProjectsForUser();
     },[])
 
-    // const config = {
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         // 'Authorization': `Bearer ${keycloak_token}`
-    //     }
-    // }
 
     const initNewProrject = async () => {
 
         let newProject = {
-            project_id: nanoid(8),//"1244777",
+            project_id: nanoid(8),
             project_name: "to-be-defined",
             owner: username,
             "develop_areas": {
@@ -60,9 +54,7 @@ function ProjectList({stageUpdateSink, username}){
             current_task_status: "INIT"
         }
 
-        axios
-            .all(
-                [
+        axios.all([
                     axios.post(`/maf/projects/new`,newProject, config),
                     axios.post(`/maf/tasks/current`, ownerTaskUpdate, config)
                 ]
@@ -84,15 +76,16 @@ function ProjectList({stageUpdateSink, username}){
 
     return (
         <div className="flex">
-            <Card className="mt-6 w-screen ">
-                <CardBody>
+            <Card className="mt-6 w-screen h-[calc(95%)]">
+                <CardBody className="h-[calc(97%)]">
                     <Typography variant="h5" color="blue-gray" className="mb-2">
                         Проекты пользователя {username}
                     </Typography>
                     <hr className="h-px" />
                     <div className="grid grid-cols-4
-                                    h-full
+                                    h-[calc(95%)]
                                     pt-4 pl-2 pr-2 pb-2
+                                    rounded-lg
                                     overflow-y-scroll" >
                         <div >
                             <Button

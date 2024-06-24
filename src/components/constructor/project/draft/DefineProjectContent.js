@@ -181,7 +181,7 @@ function DefineProjectContent({stageUpdateSink, username}){
 
 
                 <Card className="mt-6 w-full basis-1/3 shadow-lg pr-2">
-                    <CardBody className="h-[calc(90%)]">
+                    <CardBody className="h-[calc(95%)]">
                         <Typography variant="h5" color="blue-gray" className="mb-2">
                                 Состав проекта {currentProject.current.project_id}
                         </Typography>
