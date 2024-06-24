@@ -15,7 +15,7 @@ function ProjectList({stageUpdateSink, username}){
     const retrieveProjectsForUser = async () =>
     {
         try {
-            await axios.get(`${baseUrl}/maf/user/projects/${username}`, config)
+            await axios.get(`/maf/user/projects/${username}`, config)
                 .then(
                     (prj_response) => {
                         const {data} = prj_response;
@@ -60,9 +60,11 @@ function ProjectList({stageUpdateSink, username}){
             current_task_status: "INIT"
         }
 
-        axios.all([
-                    axios.post(`${baseUrl}/maf/projects/new`,newProject, config),
-                    axios.post(`${baseUrl}/maf/tasks/current/`, ownerTaskUpdate, config)
+        axios
+            .all(
+                [
+                    axios.post(`/maf/projects/new`,newProject, config),
+                    axios.post(`/maf/tasks/current/`, ownerTaskUpdate, config)
                 ]
         ).then(
                 axios.spread(

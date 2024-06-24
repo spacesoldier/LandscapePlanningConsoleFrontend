@@ -1,4 +1,5 @@
 import { useKeycloak } from "@react-keycloak/web";
+import axios from "axios";
 
 // const API_BASE_URL = 'http://localhost:8000'; // local dev
 //
@@ -47,10 +48,12 @@ import { useKeycloak } from "@react-keycloak/web";
 const API_BASE_URL = 'https://app.simplizio.com'; // server installation
 const authProvider = useKeycloak; // server instance
 
+axios.defaults.baseURL = API_BASE_URL;
+
 /* server instance */
 const config = () => {
 
-    const token = authProvider().keycloak.token
+    const token = authProvider().keycloak.token;
 
     return{
         scheme: 'https',
