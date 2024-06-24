@@ -40,7 +40,7 @@ function ConstructorPage(){
         <div className="App h-full">
             <SystemNavbar />
 
-            <section className="flex grow h-[calc(90%)]">
+            <section className="flex grow h-[calc(90%)] overflow-clip">
                 {page_selector[currentStage](updateStage)}
             </section>
         </div>
