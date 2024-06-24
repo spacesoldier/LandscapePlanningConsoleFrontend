@@ -9,14 +9,12 @@ import {
 } from "@material-tailwind/react";
 import { FaUser } from "react-icons/fa6";
 import ApiClient from "../../api/ApiClient";
-//  import { useKeycloak } from "@react-keycloak/web";
 
 export function SystemNavbar() {
 
     const {keycloak} = ApiClient().auth_srv();
 
     const [openNav, setOpenNav] = React.useState(false);
-     // const { keycloak, initialized } = useKeycloak();
 
     React.useEffect(() => {
         window.addEventListener(
@@ -35,8 +33,8 @@ export function SystemNavbar() {
             >
                 <div className="inline-flex items-center">
                     <FaUser className="w-4 h-4"/>
-                    {/*<div className="pl-4">architect</div>*/}
-                    <div className="pl-4">{keycloak.tokenParsed.preferred_username}</div>
+                    <div className="pl-4">architect</div>
+                    {/*<div className="flex items-center">{keycloak.tokenParsed.preferred_username}</div>*/}
                 </div>
             </Typography>
         </ul>
@@ -61,7 +59,7 @@ export function SystemNavbar() {
                                 variant="gradient"
                                 className="lg:inline-block"
                                 hidden={!openNav}
-                                // onClick={() => keycloak.logout()}
+                                onClick={() => keycloak.logout()}
                             >
                                 Выйти
                             </Button>
@@ -107,15 +105,6 @@ export function SystemNavbar() {
                 </div>
                 <MobileNav open={openNav}>
                     {navList}
-                    {/*<div className="flex items-center gap-x-1">*/}
-                    {/*    <Button*/}
-                    {/*        variant="gradient"*/}
-                    {/*        className="lg:inline-block"*/}
-                    {/*        // onClick={() => keycloak.logout()}*/}
-                    {/*    >*/}
-                    {/*        Выйти*/}
-                    {/*    </Button>*/}
-                    {/*</div>*/}
                 </MobileNav>
             </Navbar>
         </div>
