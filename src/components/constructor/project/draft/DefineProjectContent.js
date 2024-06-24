@@ -21,8 +21,8 @@ function DefineProjectContent({stageUpdateSink, username}){
 
     const prepareProjectContent = async () => {
         axios.all([
-                axios.get(`${baseUrl}/maf/area/list`, config),
-                axios.get(`${baseUrl}/maf/tasks/status/${username}`, config),
+                axios.get(`/maf/area/list`, config),
+                axios.get(`/maf/tasks/status/${username}`, config),
             ]
         ).then(
             axios.spread(
@@ -49,7 +49,7 @@ function DefineProjectContent({stageUpdateSink, username}){
         ).then(
             () => {
                 console.log(`request project status for project ${userTask.current.current_task_id}`)
-                axios.get(`${baseUrl}/maf/projects/${userTask.current.current_task_id}`, config).then(
+                axios.get(`/maf/projects/${userTask.current.current_task_id}`, config).then(
                     (projectResponse) => {
                         currentProject.current = projectResponse.data.project;
                         console.log(projectResponse.data);
@@ -105,8 +105,8 @@ function DefineProjectContent({stageUpdateSink, username}){
         userTask.current.current_task_status = "IN_PROGRESS";
 
         axios.all([
-                axios.post(`${baseUrl}/maf/projects/update/`,currentProject.current, config),
-                axios.post(`${baseUrl}/maf/tasks/current/`, userTask.current, config)
+                axios.post(`/maf/projects/update`,currentProject.current, config),
+                axios.post(`/maf/tasks/current`, userTask.current, config)
             ]
         ).then(
             axios.spread(
@@ -183,7 +183,7 @@ function DefineProjectContent({stageUpdateSink, username}){
                 <Card className="mt-6 w-full basis-1/3 shadow-lg pr-2">
                     <CardBody className="h-[calc(90%)]">
                         <Typography variant="h5" color="blue-gray" className="mb-2">
-                                Состав проекта
+                                Состав проекта {currentProject.current.project_id}
                         </Typography>
                         <ul className="pt-4 h-[calc(95%)] w-full
                                             border-solid border-2 border-gray-400 rounded-lg
