@@ -23,7 +23,6 @@ function JumboLandingTron(){
                 </p>
                 <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
                     <LoginButton buttonSize="lg"/>
-                    {/*<SubscriptionPopover btnSize="lg" authService={keycloakInstance}/>*/}
                 </div>
             </div>
         </section>

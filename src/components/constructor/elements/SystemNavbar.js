@@ -8,11 +8,15 @@ import {
     Card,
 } from "@material-tailwind/react";
 import { FaUser } from "react-icons/fa6";
- import { useKeycloak } from "@react-keycloak/web";
+import ApiClient from "../../api/ApiClient";
+//  import { useKeycloak } from "@react-keycloak/web";
 
 export function SystemNavbar() {
+
+    const {keycloak} = ApiClient().auth_srv();
+
     const [openNav, setOpenNav] = React.useState(false);
-     const { keycloak, initialized } = useKeycloak();
+     // const { keycloak, initialized } = useKeycloak();
 
     React.useEffect(() => {
         window.addEventListener(
@@ -29,22 +33,24 @@ export function SystemNavbar() {
                 color="blue-gray"
                 className="p-1 font-normal"
             >
-                <div className="flex justify-between">
-                    <FaUser />
-                    <div className="flex items-center">{keycloak.tokenParsed.preferred_username}</div>
+                <div className="inline-flex items-center">
+                    <FaUser className="w-4 h-4"/>
+                    {/*<div className="pl-4">architect</div>*/}
+                    <div className="pl-4">{keycloak.tokenParsed.preferred_username}</div>
                 </div>
             </Typography>
         </ul>
     );
 
     return (
-        <div className="-m-6 max-h-[768px] w-[calc(100%+48px)] overflow-scroll">
-            <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-8 lg:px-8 lg:py-8">
-                <div className="flex items-center justify-between text-blue-gray-900">
+        // <div className="-m-6 max-h-[768px] w-[calc(100%+48px)] overflow-scroll">
+        <div className="-m-6 h-50 w-[calc(100%+20px)]">
+            <Navbar className="shadow-lg pb-4 sticky top-0 z-10 h-24 max-w-full rounded-none px-4 py-8 lg:px-8 lg:py-8">
+                <div className="pt-2 flex items-center justify-between text-blue-gray-900">
                     <Typography
                         as="a"
                         href="#"
-                        className="mr-4 cursor-pointer py-1.5 font-medium"
+                        className="mr-4 cursor-pointer pl-16 py-1.5 font-medium"
                     >
                         Планирование территорий
                     </Typography>
@@ -54,7 +60,8 @@ export function SystemNavbar() {
                             <Button
                                 variant="gradient"
                                 className="lg:inline-block"
-                                onClick={() => keycloak.logout()}
+                                hidden={!openNav}
+                                // onClick={() => keycloak.logout()}
                             >
                                 Выйти
                             </Button>
@@ -100,15 +107,15 @@ export function SystemNavbar() {
                 </div>
                 <MobileNav open={openNav}>
                     {navList}
-                    <div className="flex items-center gap-x-1">
-                        <Button
-                            variant="gradient"
-                            className="lg:inline-block"
-                            onClick={() => keycloak.logout()}
-                        >
-                            Выйти
-                        </Button>
-                    </div>
+                    {/*<div className="flex items-center gap-x-1">*/}
+                    {/*    <Button*/}
+                    {/*        variant="gradient"*/}
+                    {/*        className="lg:inline-block"*/}
+                    {/*        // onClick={() => keycloak.logout()}*/}
+                    {/*    >*/}
+                    {/*        Выйти*/}
+                    {/*    </Button>*/}
+                    {/*</div>*/}
                 </MobileNav>
             </Navbar>
         </div>

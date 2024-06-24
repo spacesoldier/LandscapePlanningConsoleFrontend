@@ -1,23 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { ReactKeycloakProvider } from "@react-keycloak/web";
-import KeycloakConfig from "./components/Keycloak";
-
-import { ThemeProvider } from "@material-tailwind/react";
+import AppRoot from "./components/api/AppRoot";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <ReactKeycloakProvider authClient={KeycloakConfig}>
-        <React.StrictMode>
-          <ThemeProvider>
-              <App />
-          </ThemeProvider>
-        </React.StrictMode>
-    </ReactKeycloakProvider>
+    <AppRoot />
 );
 
 // If you want to start measuring performance in your app, pass a function

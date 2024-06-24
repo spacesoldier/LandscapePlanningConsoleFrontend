@@ -2,17 +2,17 @@ import logo from './logo.svg';
 import './App.css';
 
 import LoginPage from "./components/landing/LoginPage";
-import {useKeycloak} from "@react-keycloak/web";
 import ConstructorPage from "./components/constructor/ConstructorPage";
 
 import {LoadingPage} from "./components/LoadingPage";
+import ApiClient from "./components/api/ApiClient";
 
 function App() {
 
-    const { keycloak, initialized } = useKeycloak();
+    const { keycloak, initialized } = ApiClient().auth_srv();
 
     if (!initialized) {
-        return <LoadingPage />      //<div>Loading...</div>;
+        return <LoadingPage />
     }
 
     if (!keycloak.authenticated) {
@@ -25,11 +25,3 @@ function App() {
 }
 
 export default App;
-
-// const WrappedApp = () => (
-//     <ReactKeycloakProvider authClient={KeycloakConfig}>
-//         <App />
-//     </ReactKeycloakProvider>
-// );
-//
-// export default WrappedApp;

@@ -1,10 +1,10 @@
-import { useKeycloak } from "@react-keycloak/web";
 
-import { Typography, Input, Button } from "@material-tailwind/react";
+import { Button } from "@material-tailwind/react";
+import ApiClient from "../api/ApiClient";
 
 function LoginButton({buttonSize}){
 
-    const { keycloak } = useKeycloak();
+    const { keycloak } = ApiClient().auth_srv();
 
     return(
         <Button

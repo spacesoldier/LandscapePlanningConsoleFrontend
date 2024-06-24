@@ -1,36 +1,48 @@
 import React from "react";
-import SimpleCard from "./SimpleCard";
-import {FeaturedImageGallery} from "./ImageGallery";
-import {SidebarWithCta} from "./SidebarWithCta";
-import {SystemNavbar} from "./SystemNavbar";
-import { useKeycloak } from "@react-keycloak/web";
+
+import {SystemNavbar} from "./elements/SystemNavbar";
+import ProjectList from "./project/list/ProjectList";
+import DefineProjectContent from "./project/draft/DefineProjectContent";
+import ProjectReport from "./project/report/ProjectReport";
+import ApiClient from "../api/ApiClient";
 
 function ConstructorPage(){
 
-    const { keycloak, initialized } = useKeycloak();
+    const { keycloak, initialized } = ApiClient().auth_srv();
+
+    const curr_username = keycloak.tokenParsed.preferred_username ;
+
+    const [currentStage,setCurrentStage] = React.useState("projects");
+
+    const updateStage = (newStage) => {
+        setCurrentStage(newStage);
+    }
+
+    const page_selector = {
+        "projects": (stageSink) => {
+            return (
+                <ProjectList username={curr_username} stageUpdateSink={stageSink} />
+            );
+        },
+        "new-project": (stageSink) => {
+            return (
+                <DefineProjectContent username={curr_username} stageUpdateSink={stageSink}/>
+            );
+        },
+        "project-overview": (stageSink) =>{
+            return (
+                <ProjectReport stageUpdateSink={stageSink}/>
+            );
+        }
+    }
 
     return (
-        <div className="App">
+        <div className="App h-full">
             <SystemNavbar />
 
-            <div class="container">
-                <h1 className="bg-slate-500 text-black text-center">Тут будет список проектов пользователя</h1>
-            </div>
-            <div class="gap-8 columns-3">
-                <SimpleCard />
-                <SimpleCard />
-                <SimpleCard />
-                <SimpleCard />
-                <SimpleCard />
-                <SimpleCard />
-                <SimpleCard />
-                <SimpleCard />
-                <SimpleCard />
-            </div>
-            <div class="container content-center">
-                <FeaturedImageGallery />
-            </div>
-            <SidebarWithCta />
+            <section className="flex grow h-[calc(90%)]">
+                {page_selector[currentStage](updateStage)}
+            </section>
         </div>
     );
 }
