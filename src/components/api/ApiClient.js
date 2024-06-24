@@ -44,7 +44,7 @@ import { useKeycloak } from "@react-keycloak/web";
 // }
 
 
-const API_BASE_URL = ''; // server installation
+const API_BASE_URL = 'https://app.simplizio.com'; // server installation
 const authProvider = useKeycloak; // server instance
 
 /* server instance */
