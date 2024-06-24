@@ -64,7 +64,7 @@ function ProjectList({stageUpdateSink, username}){
             .all(
                 [
                     axios.post(`/maf/projects/new`,newProject, config),
-                    axios.post(`/maf/tasks/current/`, ownerTaskUpdate, config)
+                    axios.post(`/maf/tasks/current`, ownerTaskUpdate, config)
                 ]
         ).then(
                 axios.spread(
