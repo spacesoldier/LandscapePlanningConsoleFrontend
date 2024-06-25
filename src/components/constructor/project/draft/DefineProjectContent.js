@@ -21,7 +21,7 @@ function DefineProjectContent({stageUpdateSink, username}){
 
     const prepareProjectContent = async () => {
         axios.all([
-                axios.get(`/maf/area/list`, config),
+                axios.get(`/maf/area/all`, config),
                 axios.get(`/maf/tasks/status/${username}`, config),
             ]
         ).then(
@@ -116,7 +116,7 @@ function DefineProjectContent({stageUpdateSink, username}){
                 }
             )
         ).then(
-            () => stageUpdateSink("project-overview")
+            () => stageUpdateSink("project-edit")
         ).catch(
             error => console.error('Error pushing data:', error)
         );
