@@ -7,13 +7,24 @@ function AreaPanelCard({event_proxy, area_data}){
 
     const FocusButton = motion(Button);
 
+    const current_area = area_data;
+
     const sendMapFocus = (new_focus) => {
+
+        const area_selected_payload = {
+            terr_id: area_data.terr_id,
+            address: area_data.address
+        }
+
         if (event_proxy !== undefined){
             event_proxy.sendEvent(`flyTo--${new_focus.terr_id}`, new_focus);
+            event_proxy.sendEvent(
+                            "area_selected", area_selected_payload
+                                )
         }
     }
 
-    const current_area = area_data;
+
 
     return (
         <Card
