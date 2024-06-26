@@ -10,11 +10,16 @@ function AreaTitle({event_proxy}){
         setTitleText(newTitle);
     }
 
+    const receiveAreaSelected = (update) => {
+        setTitleText(update.address);
+    }
+
     useEffect(
         () => {
             if (event_proxy !== undefined){
                 console.log("set event proxy for AreaTitle")
                 event_proxy.subscribeOn("area_title_update", updateTitle);
+                event_proxy.subscribeOn("area_selected", receiveAreaSelected);
             } else {
                 console.log("AreaTitle: no event proxy provided")
             }
