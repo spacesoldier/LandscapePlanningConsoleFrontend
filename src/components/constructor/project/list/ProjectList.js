@@ -6,7 +6,7 @@ import ProjectCard from "./ProjectCard";
 import {nanoid} from "nanoid";
 import ApiClient from "../../../api/ApiClient";
 
-function ProjectList({stageUpdateSink, username}){
+function ProjectList({event_proxy, username}){
 
     const [projects,setProjects] = useState([])
 
@@ -15,7 +15,7 @@ function ProjectList({stageUpdateSink, username}){
     const retrieveProjectsForUser = async () =>
     {
         try {
-            await axios.get(`/maf/user/projects/${username}`, config)
+            await axios.get(`/maf/projects/by-owner/${username}`, config)
                 .then(
                     (prj_response) => {
                         const {data} = prj_response;
@@ -43,6 +43,9 @@ function ProjectList({stageUpdateSink, username}){
             owner: username,
             "develop_areas": {
 
+            },
+            "develop_clusters": {
+
             }
         }
 
@@ -56,17 +59,18 @@ function ProjectList({stageUpdateSink, username}){
 
         axios.all([
                     axios.post(`/maf/projects/new`,newProject, config),
-                    axios.post(`/maf/tasks/current`, ownerTaskUpdate, config)
+                    axios.post(`/maf/users/tasks/current`, ownerTaskUpdate, config)
                 ]
         ).then(
                 axios.spread(
                     (newProjectResponse, currentTaskUpdateResponse) => {
                         console.log(`new project created ${JSON.stringify(newProjectResponse.data)}`);
                         console.log(`current task updated ${JSON.stringify(currentTaskUpdateResponse.data)}`);
+                        event_proxy.sendEvent("stage-update","new-project");
                     }
                 )
         ).then(
-                () => stageUpdateSink("new-project")
+                () => {event_proxy.sendEvent("stage-update","new-project")}
         ).catch(
                 error => console.error('Error pushing data:', error)
         );

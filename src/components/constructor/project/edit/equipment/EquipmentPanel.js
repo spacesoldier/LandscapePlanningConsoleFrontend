@@ -1,31 +1,32 @@
-import {Button, Card, CardBody, CardFooter, Typography} from "@material-tailwind/react";
+import {Button, Card, CardBody, CardFooter, Spinner, Typography} from "@material-tailwind/react";
 import {FaChartBar} from "react-icons/fa6";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import ApiClient from "../../../../api/ApiClient";
 import EquipmentItem from "./EquipmentItem";
 import { AnimatePresence, motion } from "framer-motion";
+import ReportButton from "../controls/ReportButton";
 
 function EquipmentPanel({event_proxy}){
 
     const {baseUrl, config} = ApiClient();
 
-    const [equipment, setEquipment] = useState({});
-    const [hasEquipment, setHasEquipment] = useState(false);
+    const [surfaceReqs, setSurfaceReqs] = useState({});
+    const [hasSurfaceReqs, setHasSurfaceReqs] = useState(false);
 
 
 
 
     const loadAreaEquipment = (update) => {
         axios.all([
-                axios.get(`/maf/area/equipment/list/${update.terr_id}`, config),
+                axios.get(`/maf/equipment/surface/required/${update.terr_id}`, config),
             ]
         ).then(
             axios.spread(
                 (equipmentData) => {
-                    console.log(`current user task ${JSON.stringify(equipmentData.data.equipment)}`);
-                    setEquipment(equipmentData.data.equipment[0]);
-                    setHasEquipment(true);
+                    console.log(`current user task ${JSON.stringify(equipmentData.data.requirements)}`);
+                    setSurfaceReqs(equipmentData.data.requirements[0]);
+                    setHasSurfaceReqs(true);
                 }
             )
         ).catch(
@@ -57,28 +58,30 @@ function EquipmentPanel({event_proxy}){
 
                                     shadow-lg shadow-gray-500
                                     ">
-            <CardBody className="h-full">
-                <Typography variant="h5" color="blue-gray" className="mb-2">
+            <CardBody className="h-[calc(90%)]">
+                <Typography variant="h6" color="blue-gray" className="mb-2">
                     Наполнение
                     {/*Состав проекта {currentProject.current.project_id}*/}
                 </Typography>
-                <div className="pt-4 h-[calc(95%)] w-full
+                <div className="h-[calc(95%)] w-full
                                 overflow-y-scroll
                                             "
                 >
                     {
-                        hasEquipment ? <EquipmentItem
-                                                    equipment_item={equipment}
+                        hasSurfaceReqs ? <EquipmentItem
+                                                    surface_reqs={surfaceReqs}
                                                     event_proxy={event_proxy}
                                                 /> :
-                                    <div></div>
+                            <div className="flex flex-grow h-full items-center justify-center">
+                                <Spinner className="h-12 w-12" />
+                            </div>
                     }
 
                 </div>
             </CardBody>
             <CardFooter className="pt-0">
                 <div className="grid h-full justify-items-end">
-
+                    <ReportButton event_proxy={event_proxy} />
                 </div>
             </CardFooter>
         </Card>

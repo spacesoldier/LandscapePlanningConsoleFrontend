@@ -3,7 +3,7 @@ import React from "react";
 import {FaArrowRight} from "react-icons/fa6";
 import { motion } from "framer-motion";
 
-function AreaCard({area_data, deckUpdateHandler}){
+function AreaCard({area_data, event_proxy}){
 
     const MotionButton = motion(Button);
 
@@ -27,7 +27,7 @@ function AreaCard({area_data, deckUpdateHandler}){
             <CardFooter className="h-20">
                 <div className="flex justify-end">
                     <MotionButton
-                        onClick = { () => deckUpdateHandler(area_data.terr_id)}
+                        onClick = { () => event_proxy.sendEvent("area-selected",area_data.terr_id)}
                         whileTap={{ scale: 0.9 }}
                     >
                         <FaArrowRight />

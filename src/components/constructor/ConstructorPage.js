@@ -30,9 +30,59 @@ function ConstructorPage(){
         setCurrentStage(newStage);
     }
 
-    const getUserTask = async () => {
+
+
+    const eventProxyFn = () => {
+
+        const eventHandlers = {
+            all: {
+
+            }
+        }
+
+        const subscribeOn = (eventName, eventHandler) => {
+            if (eventName in eventHandlers.all){
+                eventHandlers.all[eventName].push(eventHandler);
+                console.log(`register handler for ${eventName}`)
+            }
+            else {
+                console.log(`register handler for new event ${eventName}`)
+                eventHandlers.all[eventName] = [eventHandler];
+            }
+        }
+
+        const sendEvent = (eventName, eventPayload) =>{
+            if (eventName in eventHandlers.all){
+                eventHandlers.all[eventName].forEach(
+                    (handler) => {
+                        handler(eventPayload);
+                    }
+                )
+            }
+        }
+
+        return {
+            subscribeOn,
+            sendEvent
+        }
+    };
+
+    const EventProxy = {
+        instance: null
+    }
+
+    const getEventProxy = () => {
+        if (EventProxy.instance == null){
+            EventProxy.instance = eventProxyFn();
+        }
+        return EventProxy.instance;
+    };
+
+
+
+    const prepareRequiredData = async () => {
         axios.all([
-                axios.get(`/maf/tasks/status/${curr_username}`, config),
+                axios.get(`/maf/users/tasks/status/${curr_username}`, config),
             ]
         ).then(
             axios.spread(
@@ -45,6 +95,8 @@ function ConstructorPage(){
                     } else {
                         updateStage("projects");
                     }
+
+                    getEventProxy().subscribeOn("update-stage", updateStage);
                 }
             )
         ).catch(
@@ -52,29 +104,34 @@ function ConstructorPage(){
         );
     }
 
+
+
     useEffect(() => {
-        getUserTask();
-    },[])
+        prepareRequiredData();
+    },[]);
+
+
+
 
     const page_selector = {
         "projects": (stageSink) => {
             return (
-                <ProjectList username={curr_username} stageUpdateSink={stageSink} />
+                <ProjectList username={curr_username} event_proxy={getEventProxy()} />
             );
         },
         "new-project": (stageSink) => {
             return (
-                <DefineProjectContent username={curr_username} stageUpdateSink={stageSink}/>
+                <DefineProjectContent username={curr_username} event_proxy={getEventProxy()}/>
             );
         },
         "project-edit": (stageSink) =>{
             return (
-                <ProjectEditor username={curr_username} stageUpdateSink={stageSink}/>
+                <ProjectEditor username={curr_username} event_proxy={getEventProxy()}/>
             );
         },
         "project-overview": (stageSink) =>{
             return (
-                <ProjectReport username={curr_username} stageUpdateSink={stageSink}/>
+                <ProjectReport username={curr_username} event_proxy={getEventProxy()}/>
             );
         },
         "define_from_user_task": (stageSink) => {
