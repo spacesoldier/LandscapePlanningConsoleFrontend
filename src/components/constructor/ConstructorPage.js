@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import {useEffect, useState} from "react";
 
 import {SystemNavbar} from "./elements/SystemNavbar";
 import ProjectList from "./project/list/ProjectList";
@@ -9,13 +9,13 @@ import ProjectEditor from "./project/edit/ProjectEditor";
 import axios from "axios";
 import {Spinner} from "@material-tailwind/react";
 
-function ConstructorPage(){
+function ConstructorPage({event_proxy}){
 
     const { keycloak, initialized, baseUrl, config } = ApiClient().auth_srv();
 
     const curr_username = keycloak.tokenParsed.preferred_username ;
 
-    const [currentStage,setCurrentStage] = React.useState("define_from_user_task");
+    const [currentStage,setCurrentStage] = useState("define_from_user_task");
 
     const stageMapping = {
             "INIT": "new-project",
@@ -29,55 +29,6 @@ function ConstructorPage(){
     const updateStage = (newStage) => {
         setCurrentStage(newStage);
     }
-
-
-
-    const eventProxyFn = () => {
-
-        const eventHandlers = {
-            all: {
-
-            }
-        }
-
-        const subscribeOn = (eventName, eventHandler) => {
-            if (eventName in eventHandlers.all){
-                eventHandlers.all[eventName].push(eventHandler);
-                console.log(`register handler for ${eventName}`)
-            }
-            else {
-                console.log(`register handler for new event ${eventName}`)
-                eventHandlers.all[eventName] = [eventHandler];
-            }
-        }
-
-        const sendEvent = (eventName, eventPayload) =>{
-            if (eventName in eventHandlers.all){
-                eventHandlers.all[eventName].forEach(
-                    (handler) => {
-                        handler(eventPayload);
-                    }
-                )
-            }
-        }
-
-        return {
-            subscribeOn,
-            sendEvent
-        }
-    };
-
-    const EventProxy = {
-        instance: null
-    }
-
-    const getEventProxy = () => {
-        if (EventProxy.instance == null){
-            EventProxy.instance = eventProxyFn();
-        }
-        return EventProxy.instance;
-    };
-
 
 
     const prepareRequiredData = async () => {
@@ -96,7 +47,7 @@ function ConstructorPage(){
                         updateStage("projects");
                     }
 
-                    getEventProxy().subscribeOn("update-stage", updateStage);
+                    event_proxy.subscribeOn("update-stage", updateStage);
                 }
             )
         ).catch(
@@ -116,22 +67,22 @@ function ConstructorPage(){
     const page_selector = {
         "projects": (stageSink) => {
             return (
-                <ProjectList username={curr_username} event_proxy={getEventProxy()} />
+                <ProjectList username={curr_username} event_proxy={event_proxy} />
             );
         },
         "new-project": (stageSink) => {
             return (
-                <DefineProjectContent username={curr_username} event_proxy={getEventProxy()}/>
+                <DefineProjectContent username={curr_username} event_proxy={event_proxy}/>
             );
         },
         "project-edit": (stageSink) =>{
             return (
-                <ProjectEditor username={curr_username} event_proxy={getEventProxy()}/>
+                <ProjectEditor username={curr_username} event_proxy={event_proxy}/>
             );
         },
         "project-overview": (stageSink) =>{
             return (
-                <ProjectReport username={curr_username} event_proxy={getEventProxy()}/>
+                <ProjectReport username={curr_username} event_proxy={event_proxy}/>
             );
         },
         "define_from_user_task": (stageSink) => {
