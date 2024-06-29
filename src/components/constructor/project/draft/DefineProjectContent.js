@@ -9,6 +9,7 @@ import ApiClient from "../../../api/ApiClient";
 import AreaSelectPanel from "./AreaSelectPanel";
 import CommitProjectContentBtn from "./controls/CommitProjectContentBtn";
 import ProjectContentPanel from "./ProjectContentPanel";
+import AreaSelectModeSwittch from "./controls/AreaSelectModeSwittch";
 
 function DefineProjectContent({event_proxy, username}){
 
@@ -108,7 +109,6 @@ function DefineProjectContent({event_proxy, username}){
                 (updateProjectResponse, currentTaskUpdateResponse) => {
                     console.log(`new project created ${JSON.stringify(updateProjectResponse.data)}`);
                     console.log(`current task updated ${JSON.stringify(currentTaskUpdateResponse.data)}`);
-                    event_proxy.sendEvent("update-stage","project-edit");
                 }
             )
         ).then(
@@ -225,21 +225,7 @@ function DefineProjectContent({event_proxy, username}){
             <div className="flex grow flex-row gap-4 pl-2 pr-2 pb-4">
                     <Card className="mt-6 w-full basis-2/3 shadow-lg pl-2">
                         <CardBody className="h-full">
-                            <div className="flex row h-8 flex-grow">
-                                <Typography variant="h5" color="blue-gray" className="mb-2">
-                                    Список территорий благоустройства
-                                </Typography>
-                                <div className="flex row flex-grow justify-end">
-                                    <div className="text-xs mt-2 mr-4">Кластерами</div>
-                                    <FaExpand className="mt-2 mr-4"/>
-                                    <Switch
-
-                                    />
-                                    <FaTableCells className="mt-2 ml-4" />
-                                    <div className="text-xs mt-2 ml-4">Вручную</div>
-                                </div>
-
-                            </div>
+                            <AreaSelectModeSwittch event_proxy={event_proxy} />
 
                             {/*<hr className="h-px" />*/}
                             <AreaSelectPanel event_proxy={event_proxy} />

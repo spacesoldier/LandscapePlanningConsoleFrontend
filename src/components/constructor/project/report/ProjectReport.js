@@ -22,11 +22,12 @@ function ProjectReport({username, event_proxy}){
             axios.spread(
                 (currentTaskUpdateResponse) => {
                     console.log(`current task updated ${JSON.stringify(currentTaskUpdateResponse.data)}`);
-                    event_proxy.sendEvent("update-stage","project")
                 }
             )
         ).then(
-            () => {}
+            () => {
+                event_proxy.sendEvent("update-stage","projects");
+            }
         ).catch(
             error => console.error('Error pushing data:', error)
         );
@@ -69,7 +70,7 @@ function ProjectReport({username, event_proxy}){
                     onClick={finishWorkOnProject}
                 >
                     <FaCheck className="w-4 h-4"/>
-                    <span className="pl-4">Done</span>
+                    <span className="pl-4">Завершить</span>
                 </Button>
             </CardFooter>
         </Card>

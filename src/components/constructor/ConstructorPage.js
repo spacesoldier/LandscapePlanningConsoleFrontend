@@ -26,8 +26,43 @@ function ConstructorPage({event_proxy}){
     }
 
 
+    const page_selector = {
+        "projects": () => {
+            return (
+                <ProjectList username={curr_username} event_proxy={event_proxy} />
+            );
+        },
+        "new-project": () => {
+            return (
+                <DefineProjectContent username={curr_username} event_proxy={event_proxy}/>
+            );
+        },
+        "project-edit": () =>{
+            return (
+                <ProjectEditor username={curr_username} event_proxy={event_proxy}/>
+            );
+        },
+        "project-overview": () =>{
+            return (
+                <ProjectReport username={curr_username} event_proxy={event_proxy}/>
+            );
+        },
+        "define_from_user_task": () => {
+            return (
+                <div className="flex flex-grow h-full items-center justify-center">
+                    <Spinner className="h-12 w-12" />
+                </div>
+            );
+        }
+    }
+
     const updateStage = (newStage) => {
-        setCurrentStage(newStage);
+        if (newStage in page_selector){
+            setCurrentStage(newStage);
+        } else {
+            console.log(`wrong stage value ${newStage}`);
+        }
+
     }
 
 
@@ -64,42 +99,14 @@ function ConstructorPage({event_proxy}){
 
 
 
-    const page_selector = {
-        "projects": (stageSink) => {
-            return (
-                <ProjectList username={curr_username} event_proxy={event_proxy} />
-            );
-        },
-        "new-project": (stageSink) => {
-            return (
-                <DefineProjectContent username={curr_username} event_proxy={event_proxy}/>
-            );
-        },
-        "project-edit": (stageSink) =>{
-            return (
-                <ProjectEditor username={curr_username} event_proxy={event_proxy}/>
-            );
-        },
-        "project-overview": (stageSink) =>{
-            return (
-                <ProjectReport username={curr_username} event_proxy={event_proxy}/>
-            );
-        },
-        "define_from_user_task": (stageSink) => {
-            return (
-                <div className="flex flex-grow h-full items-center justify-center">
-                    <Spinner className="h-12 w-12" />
-                </div>
-            );
-        }
-    }
+
 
     return (
         <div className="App h-full">
             <SystemNavbar />
 
             <section className="flex grow h-[calc(90%)] overflow-clip">
-                {page_selector[currentStage](updateStage)}
+                {page_selector[currentStage]()}
             </section>
 
         </div>

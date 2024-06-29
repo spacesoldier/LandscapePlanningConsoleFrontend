@@ -1,15 +1,4 @@
-import {
-    Button,
-    Card,
-    CardBody,
-    CardFooter, IconButton, SpeedDial,
-    SpeedDialAction,
-    SpeedDialContent, SpeedDialHandler,
-    Typography
-} from "@material-tailwind/react";
-import {AnimatePresence, motion} from "framer-motion";
 
-import {FaChartBar, FaToolbox, FaHammer, FaHighlighter, FaRegObjectGroup} from "react-icons/fa6";
 import {useEffect, useRef} from "react";
 import axios from "axios";
 import ApiClient from "../../../api/ApiClient";
@@ -26,9 +15,6 @@ function ProjecEditor({event_proxy, username}){
     const userTask = useRef({});
     const currentProject = useRef({});
 
-
-
-
     const finishProjectEditing = (payload) => {
         userTask.current.current_task_status = "DONE";
         currentProject.current.status = "DONE";
@@ -42,11 +28,13 @@ function ProjecEditor({event_proxy, username}){
                 (updateProjectResponse, currentTaskUpdateResponse) => {
                     console.log(`project edit completed ${JSON.stringify(updateProjectResponse.data)}`);
                     console.log(`current task updated ${JSON.stringify(currentTaskUpdateResponse.data)}`);
-                    event_proxy.sendEvent("update-stage","project-overview")
+
                 }
             )
         ).then(
-            () => {}
+            () => {
+                event_proxy.sendEvent("update-stage","project-overview");
+            }
         ).catch(
             error => console.error('Error pushing data:', error)
         );
@@ -79,6 +67,7 @@ function ProjecEditor({event_proxy, username}){
                     ).catch(
                         error => console.error('Error fetching areas data:', error)
                     );
+
 
                     console.log(`request project status for project ${userTask.current.current_task_id}`)
                     axios.get(`/maf/projects/details/${userTask.current.current_task_id}`, config).then(

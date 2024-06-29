@@ -6,33 +6,35 @@ import ConstructorPage from "./components/constructor/ConstructorPage";
 
 import {LoadingPage} from "./components/LoadingPage";
 import ApiClient from "./components/api/ApiClient";
+import {useRef} from "react";
 
 function App() {
 
     const { keycloak, initialized } = ApiClient().auth_srv();
 
+    const eventHandlers = useRef({
+        all: {
+
+        }
+    });
+
     const eventProxyFn = () => {
 
-        const eventHandlers = {
-            all: {
-
-            }
-        }
 
         const subscribeOn = (eventName, eventHandler) => {
-            if (eventName in eventHandlers.all){
-                eventHandlers.all[eventName].push(eventHandler);
+            if (eventName in eventHandlers.current.all){
+                eventHandlers.current.all[eventName].push(eventHandler);
                 console.log(`register handler for ${eventName}`)
             }
             else {
                 console.log(`register handler for new event ${eventName}`)
-                eventHandlers.all[eventName] = [eventHandler];
+                eventHandlers.current.all[eventName] = [eventHandler];
             }
         }
 
         const sendEvent = (eventName, eventPayload) =>{
-            if (eventName in eventHandlers.all){
-                eventHandlers.all[eventName].forEach(
+            if (eventName in eventHandlers.current.all){
+                eventHandlers.current.all[eventName].forEach(
                     (handler) => {
                         handler(eventPayload);
                     }
@@ -46,16 +48,7 @@ function App() {
         }
     };
 
-    const EventProxy = {
-        instance: null
-    }
-
-    const getEventProxy = () => {
-        if (EventProxy.instance == null){
-            EventProxy.instance = eventProxyFn();
-        }
-        return EventProxy.instance;
-    };
+    const EventProxy = useRef(eventProxyFn());
 
 
     if (!initialized) {
@@ -67,7 +60,7 @@ function App() {
     }
 
   return (
-      <ConstructorPage event_proxy={getEventProxy()}/>
+      <ConstructorPage event_proxy={EventProxy.current}/>
   );
 }
 

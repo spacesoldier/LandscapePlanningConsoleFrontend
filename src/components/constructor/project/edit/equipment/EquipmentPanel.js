@@ -14,9 +14,6 @@ function EquipmentPanel({event_proxy}){
     const [surfaceReqs, setSurfaceReqs] = useState({});
     const [hasSurfaceReqs, setHasSurfaceReqs] = useState(false);
 
-
-
-
     const loadAreaEquipment = (update) => {
         axios.all([
                 axios.get(`/maf/equipment/surface/required/${update.terr_id}`, config),

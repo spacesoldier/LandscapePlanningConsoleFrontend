@@ -5,35 +5,13 @@ import axios from "axios";
 import ProjectCard from "./ProjectCard";
 import {nanoid} from "nanoid";
 import ApiClient from "../../../api/ApiClient";
+import NewProjectButton from "./controls/NewProjectButton";
 
 function ProjectList({event_proxy, username}){
 
     const [projects,setProjects] = useState([])
 
     const {baseUrl, config} = ApiClient();
-
-    const retrieveProjectsForUser = async () =>
-    {
-        try {
-            await axios.get(`/maf/projects/by-owner/${username}`, config)
-                .then(
-                    (prj_response) => {
-                        const {data} = prj_response;
-
-                        console.log(data);
-
-                        setProjects(data.projects);
-                    }
-                );
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    }
-
-    useEffect(() => {
-        retrieveProjectsForUser();
-    },[])
-
 
     const initNewProrject = async () => {
 
@@ -66,17 +44,38 @@ function ProjectList({event_proxy, username}){
                     (newProjectResponse, currentTaskUpdateResponse) => {
                         console.log(`new project created ${JSON.stringify(newProjectResponse.data)}`);
                         console.log(`current task updated ${JSON.stringify(currentTaskUpdateResponse.data)}`);
-                        event_proxy.sendEvent("stage-update","new-project");
+                        event_proxy.sendEvent("update-stage","new-project");
                     }
                 )
         ).then(
-                () => {event_proxy.sendEvent("stage-update","new-project")}
+                () => {
+                    // event_proxy.sendEvent("stage-update","new-project");
+                }
         ).catch(
                 error => console.error('Error pushing data:', error)
         );
-
-
     }
+
+    const retrieveProjectsForUser = async () =>
+    {
+        axios.all([
+            axios.get(`/maf/projects/by-owner/${username}`, config)
+        ]).then(
+            axios.spread(
+                (projectsResponse) => {
+                    setProjects(projectsResponse.data.projects);
+                    event_proxy.subscribeOn("init-new-project",initNewProrject)
+                }
+            )
+        ).catch(
+            error => {console.error('Error fetching data:', error);}
+        );
+    }
+
+    useEffect(() => {
+        retrieveProjectsForUser();
+    },[])
+
 
     return (
         <div className="flex">
@@ -92,19 +91,7 @@ function ProjectList({event_proxy, username}){
                                     rounded-lg
                                     overflow-y-scroll" >
                         <div >
-                            <Button
-                                variant="outlined"
-                                className="h-40 w-80 inline-flex items-center border-4 border-gray-600"
-                                // onClick={() => stageUpdateSink("new-project")}
-                                onClick={() => {initNewProrject();}}
-                            >
-                                <FaPlus className="w-8 h-8"/>
-                                <span className="pl-16">
-                                    <Typography variant="h5" color="blue-gray">
-                                        Начать новый
-                                    </Typography>
-                                </span>
-                            </Button>
+                            <NewProjectButton event_proxy={event_proxy}/>
                         </div>
 
                         {
@@ -122,9 +109,6 @@ function ProjectList({event_proxy, username}){
                 </CardFooter>
             </Card>
         </div>
-
-
-
 
     );
 }
